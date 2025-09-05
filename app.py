@@ -56,7 +56,7 @@ geography_df = pd.DataFrame(geography_encoded, columns=ohe_geography.get_feature
 
 
 # combine all input features
-input_data = pd.concat([input_data, geography_df], axis=1)
+input_data = pd.concat([input_data.reset_index(drop=True), geography_df], axis=1)
 
 # scale numerical features
 input_data_scaled = scaler.transform(input_data)
@@ -72,4 +72,5 @@ st.write(f"Churn Probability: {pradiction_probability:.2f}")
 if pradiction_probability > 0.5:
     st.write("The customer is likely to churn.")
 else:
+
     st.write("The customer is unlikely to churn.")
